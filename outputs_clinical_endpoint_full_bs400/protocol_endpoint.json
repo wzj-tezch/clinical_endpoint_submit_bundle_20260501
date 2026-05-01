@@ -1,0 +1,18 @@
+{
+  "task": "binary_endpoint",
+  "label": "endpoint (1=event occurred, 0=no event by study definition)",
+  "train_n": 578,
+  "train_positive_n": 43,
+  "train_positive_rate": 0.07439446366782007,
+  "test_n": 193,
+  "test_positive_n": 15,
+  "test_positive_rate": 0.07772020725388601,
+  "outer_test_size": 0.25,
+  "outer_stratify": "endpoint",
+  "outer_split_random_state": 20260501,
+  "cohort_counts_selected": {
+    "RJ_az_original_group_nii_rai": 143,
+    "ori_cine_dicom_me_group_nii": 283,
+    "ori_cine_dicom_zhang_group_nii": 345
+  }
+}

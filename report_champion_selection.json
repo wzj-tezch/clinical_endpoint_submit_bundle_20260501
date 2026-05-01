@@ -1,0 +1,49 @@
+{
+  "selection_rule": "max 0.4*AUC+0.3*balanced_accuracy_050+0.3*f1_050 on model6_ensemble_endpoint; tie-break mcc_050 then lower brier",
+  "winner": "E:\\本基中间结果\\outputs_clinical_endpoint_n320_bs400",
+  "bundle": "E:\\本基中间结果\\report_champion_bundle_20260501_1338",
+  "ranked": [
+    {
+      "dir": "E:\\本基中间结果\\outputs_clinical_endpoint_n320_bs400",
+      "composite_0.4AUC_0.3BA_0.3F1": 0.6686753246753246,
+      "auc": 0.7857142857142857,
+      "balanced_accuracy_050": 0.7012987012987013,
+      "f1_050": 0.48,
+      "mcc_050": 0.3668253766205722,
+      "brier": 0.1317458878752964,
+      "ece": 0.1494033456329408
+    },
+    {
+      "dir": "E:\\本基中间结果\\outputs_deep_full_gpu_clinical_endpoint",
+      "composite_0.4AUC_0.3BA_0.3F1": 0.6373376623376623,
+      "auc": 0.788961038961039,
+      "balanced_accuracy_050": 0.6558441558441558,
+      "f1_050": 0.4166666666666667,
+      "mcc_050": 0.2919727474407247,
+      "brier": 0.1360142646750362,
+      "ece": 0.1529326828793107
+    },
+    {
+      "dir": "E:\\本基中间结果\\outputs_clinical_endpoint_full_bs400",
+      "composite_0.4AUC_0.3BA_0.3F1": 0.4621866897147796,
+      "auc": 0.5786516853932585,
+      "balanced_accuracy_050": 0.5767790262172284,
+      "f1_050": 0.1923076923076923,
+      "mcc_050": 0.1044395675363213,
+      "brier": 0.1449984155251406,
+      "ece": 0.2051151182611992
+    },
+    {
+      "dir": "E:\\本基中间结果\\outputs_clinical_endpoint_full_bs400_seeds5",
+      "composite_0.4AUC_0.3BA_0.3F1": 0.4621866897147796,
+      "auc": 0.5786516853932585,
+      "balanced_accuracy_050": 0.5767790262172284,
+      "f1_050": 0.1923076923076923,
+      "mcc_050": 0.1044395675363213,
+      "brier": 0.1449984155251406,
+      "ece": 0.2051151182611992
+    }
+  ],
+  "oof_isotonic_supplementary_directory": "E:\\本基中间结果\\outputs_clinical_endpoint_champion_n320_iso",
+  "cohort_scout_merge_only": "see cohort_scout_summary.json (unique_patients_merged=1015)"
+}

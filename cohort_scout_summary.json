@@ -1,0 +1,7 @@
+{
+  "seg_patients_discovered": 1223,
+  "label_merge_rows": 1477,
+  "unique_patients_merged": 1015,
+  "feature_extract_success_rows": 1067,
+  "feature_extract_failed_or_missing": 410
+}

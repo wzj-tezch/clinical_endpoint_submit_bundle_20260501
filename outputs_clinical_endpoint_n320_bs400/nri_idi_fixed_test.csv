@@ -1,0 +1,6 @@
+﻿model,nri_vs_base_endpoint,idi_vs_base_endpoint
+model2_geom_cox,-0.2727272727272727,-0.45781021347784123
+model3_full_cox,0.019480519480519487,-87.32820503548582
+model4_tree_auto,0.0,0.20287273567247124
+model5_mlp_auto,0.0,0.3605558266622848
+model6_ensemble_auto,0.0,0.28959844475706076
