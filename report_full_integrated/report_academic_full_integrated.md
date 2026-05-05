@@ -10,8 +10,8 @@
 6. [第六章 阶段对照、任务边界与结果可读性说明](#第六章-阶段对照任务边界与结果可读性说明)
 7. [第七章 讨论](#第七章-讨论收束多条探索支线)
 8. [第八章 结论与展望](#第八章-结论与展望)
-9. [参考文献](#参考文献)
-10. [附录](#附录-a临床主分析图表文件与正文图号对照冠军目录)
+9. [附录 A　临床主分析图表文件与正文图号对照（冠军目录）](#附录-a临床主分析图表文件与正文图号对照冠军目录)
+10. [参考文献](#参考文献)
 
 ---
 
@@ -60,7 +60,7 @@
 - **第四章**：阶段二路径一（合作者：流形与 2D+t）。
 - **第五章**：阶段二路径二（临床终点主分析与敏感性）。
 - **第六章**：阶段对照与并读禁忌。
-- **第七章**：讨论。**第八章**：结论与展望。**参考文献**；**附录**（图表索引、复现、图号）。
+- **第七章**：讨论。**第八章**：结论与展望。**附录**（图表索引、复现、图号）；**参考文献**（全文最末 **[1]–[27]**）。
 
 ### 1.4　临床预测模型报告规范与历史批次语义
 
@@ -230,7 +230,6 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 |  | 11 帧 | 第 2 、4 、6 、8 层（共 4个） | 7帧（统一帧数） |
 |  | 12 帧 | 第 1 、3 、5、7 、9 层（共 5个） | 7帧（统一帧数） |
 |  | 13 帧 | 第 1 、3 、5、7 、9、11 层（共 6个） | 7帧（统一帧数） |
-
 第二种清洗方案新的清洗方式是对心脏核磁共振序列数据进行标准化处理，通过统一帧数（25帧）和切片数（7层）解决数据格式不一致问题。具体而言，对帧数不足 25的病人随机复制相邻帧补充， 帧数超过 25的按时间点匹配筛选；对切片数不足 7的复制指定层，超过 7的按物理位置匹配筛选，最终输出格式统一的NIfTI文件，为后续特征计算奠定基础。具体方式见下表。
 
 ##### 表 2:数据规范化筛选与补充规则表
@@ -245,7 +244,6 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 |  | 6 层 | 统一为 7 层 | 随机选择第 i 层，复制到第 i+1 层， 同一病人所有帧的 i 值保持一致 | 复制相邻层以维持空间一致性 |
 | 层数 | 7 层 | 保持 7 层 | 不做处理，作为标准化基准 | 以 7 层为空间标准参考 |
 | 层数 | >7 层（如 8 、9、13 层） | 统一为 7 层 | 假设切片物理位置均匀分布， 计算目标 7 层位置，选择原始  切片中最接近的 7 层 | 按物理位置匹配筛选，贴近标准 |
-
 这种做法的优势在于针对性强，紧密贴合需求， 能批量处理多病人数据并保留原始空间信息，同时通过相邻复制和位置匹配逻辑减少信息损失。
 
 （2）异常图像的检测与删除
@@ -273,7 +271,6 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 | shape__threshold | 0.6 | 圆度阈值（范围 0-1），低于该值表示形状过于畸形 |
 | 二值化阈值 | 0.5 | 影像二值化判断标准（大于 0.5视为有效区域） |
 | 检测通道 | 第 0通道 | 仅校验矩阵第 0通道（可根据实际需求调整） |
-
 最终获得更加完备的数据集。
 
 #### 图像掩码处理
@@ -363,7 +360,6 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 | 总体准确率 | — | — | 0.8862 | 791 |
 | 宏平均 | 0.5726 | 0.5636 | 0.5676 | 791 |
 | 加权平均 | 0.8789 | 0.8862 | 0.8825 | 791 |
-
 混淆矩阵直观展示了模型的分类错误分布，行表示真实标签，列表示预测标签，具体结果如下表所示：
 
 ##### 表 7: 模型分类混淆矩阵
@@ -407,7 +403,6 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 | 训练轮数 | 6 轮 | 较之前增加 1 轮，确保模型充分学习加权特征 |
 | 评估输出 | 每轮输出分类报告 + 混淆矩阵 | 实时监控少数类性能变化 |
 | 优化器 | Adam（lr=1e-4） | 保持学习率稳定，避免权重震荡 |
-
 再次检验后发现，模型对少数类（Class 1）的召回率和 F1分数得到改善，但是准确率仍不高，具体分类报告和混淆矩阵如下：
 
 ##### 表 10: 优化后补充分类性能报告
@@ -419,7 +414,6 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 | 总体准确率 | — | — | 0.7016 | 791 |
 | 宏平均 | 0.5767 | 0.7468 | 0.5502 | 791 |
 | 加权平均 | 0.9162 | 0.7016 | 0.7716 | 791 |
-
 表11: 优化后补充混淆矩阵
 
 |  | Class 0（预测） | Class 1（预测） |
@@ -497,7 +491,6 @@ N(total) = 4 × N(patients)
 | 扫描序列不同 | 纹理分布差异 |
 | 分辨率与 FOV 不一致 | 全局结构尺度变化 |
 | 噪声特性差异 | 强度统计变化 |
-
 使用整体特征时会导致模型对中心差异敏感， 四等分后输入特征更关注局部模式，不容易被全局质量偏差影响。从而能够：
 
 •  提升跨中心一致性
@@ -558,7 +551,6 @@ N(total) = 4 × N(patients)
 | Precision | 0.1069 |
 | F1 Score | 0.1931 |
 | AUC | 0.6735 |
-
 结果显示两个模型均具备基本区分能力，其中 1D CNN 在正例识别能力上略差于 MLP。
 
 结果可视化
@@ -741,7 +733,6 @@ N(total) = 4 × N(patients)
 | --- | --- | --- |
 | 正常（真实） | 538（真阴性） | 5（假阳性） |
 | 患病（真实） | 109（假阴性） | 4（真阳性） |
-
 阈值分析代码：不同阈值下准确率、召回率
 
 遍历全阈值范围，分析不同阈值下模型的准确率、召回率、精确率等关键指标，筛选既能满足临床漏诊控制需求，又能平衡误诊风险的最优阈值。
@@ -773,7 +764,6 @@ N(total) = 4 × N(patients)
 | 精确率（患病样本） | 12.90% | - |
 | F1 分数 | 0.2202 | - |
 | AUC | 0.6280 | - |
-
 获得以下结果：
 
 ##### 表 22: 最终模型分类报告表（最优阈值 =0.09）
@@ -806,22 +796,12 @@ N(total) = 4 × N(patients)
 | 阳性样本比例低（数据不平衡） | 模型偏向预测负例 | 类别权重、SMOTE、GAN 过采样等 提升正样本可学习性 |
 | 现有特征可区分性不足 | 手工统计+基础纹理不足以体现病灶 | 引入更复杂深度特征选取策略 |
 | 多中心域差异影响 | 成像条件不同影响特征一致性 | 引入领域自适应、归一化策略 |
-
 阶段性总结  本阶段研究完成了基于心肌分割区域再处理的深度学习、机器学习、流行特征等分类模型搭建，实现了数据增强与 GPU 加速训练，并获得具备应用潜力的初步预测结果。模型已经具备初步智能识别能力，但性能距离临床需求仍有差距，下一阶段重点将放在提升特征表达能力和正例识别性能上，重点改进样本不平衡问题与特征学习能力，以进一步提升模型稳定性与临床价值。
 
 下一阶段将根据图像流形特征进行流形学习，并与以上模型结构进行对比整合，从中找到最为合理的判断方式。
 
-#### 参考文献：
+（对应文献见报告末尾 **参考文献** 中的 **[23]–[27]**。）
 
--, H.C., -, G.H., -, G.P., -, C.K.G., & -, R.S.P. (2025). Physiological and Pathological Hypertrophic Cardiomyopathy. International Journal For Multidisciplinary Research, 7(1). https://doi.org/10.36948/ijfmr.2025.v07i01.34963
-
-Li, L., Gao, J., Liu, X., Chen, B.-X., Su, P., & Xie, B. (2024). Tissue-level evidence of fibroblast activation protein inhibitor imaging in hypertrophic obstructive cardiomyopathy: a case series. European Heart Journal - Case Reports, 8(5). https://doi.org/10.1093/ehjcr/ytae189
-
-Zhou, S. K., Greenspan, H., Davatzikos, C., Duncan, J. S., Van Ginneken, B., Madabhushi, A., Prince, J. L., Rueckert, D., & Summers, R. M. (2021). A Review of Deep Learning in Medical Imaging: Imaging Traits, Technology Trends, Case Studies With Progress Highlights, and Future Promises. Proceedings of the IEEE, 109(5), 820–838. https://doi.org/10.1109/jproc.2021.3054390
-
-Tian, H. (2025). Progress in the application of deep learning in medical image recognition. Applied and Computational Engineering, 135(1), 10–18. https://doi.org/10.54254/2755-2721/2025.20964
-
-Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross, H.-M. (2020). Deep Random Forests for Small Sample Size Prediction with Medical Imaging Data. 2020 IEEE 17th International Symposium on Biomedical Imaging (ISBI), 1543–1547. https://doi.org/10.1109/isbi45749.2020.9098420
 中期回答「多中心张量能否进 3D CNN/区域网络与传统 ML」及「Rare-event 如何制约学习」→ 需流形归一（路径一）与可对终点的预后协议（路径二）。两路径阶段二内**并行**。
 
 
@@ -855,7 +835,6 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 | Hospital 2 (ME) | ori_cine_me_nii | ~ 260 | ~ 23 | ~ 283 |
 | Hospital 3 (RJ) | RJ_az_original_nii | ~ 77 | ~ 77 | ~ 154 |
 | 融合验证池 | Combined_All | 657 | 125 | 782 |
-
 流形分析与数据处理
 
 形态学实体边缘提取
@@ -1483,80 +1462,6 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 ---
 
-## 参考文献
-
-正文引用统一为 **方括号序号 [n]**，与下列文献表对应：**[1]–[16]** 为方法学与预后建模主线；**[17]–[22]** 为第四章（流形 / 2D+t）Formal 引文；**[23]–[27]** 为中期报告原稿补充（亦见文末附录）。
-
-**[1]** CERQUEIRA M D, WEISSMAN N J, DILSZIAN V, et al. Standardized myocardial segmentation and nomenclature for tomographic imaging of the heart: a statement for healthcare professionals from the Cardiac Imaging Committee of the Council on Clinical Cardiology of the American Heart Association[J]. *Circulation*, 2002, 105(4): 539-542.
-
-**[2]** COX D R. Regression models and life-tables[J]. *Journal of the Royal Statistical Society: Series B (Methodological)*, 1972, 34(2): 187-220.
-
-**[3]** HARRELL F E JR, LEE K L, MARK D B. Multivariable prognostic models: issues in developing models, evaluating assumptions and adequacy, and measuring and reducing errors[J]. *Statistics in Medicine*, 1996, 15(4): 361-387.
-
-**[4]** HEAGERTY P J, LUMLEY T, PEPE M S. Time-dependent ROC curves for censored survival data and a diagnostic marker[J]. *Biometrics*, 2000, 56(2): 337-347.
-
-**[5]** VICKERS A J, ELKIN E B. Decision curve analysis: a novel method for evaluating prediction models[J]. *Medical Decision Making*, 2006, 26(6): 565-574.
-
-**[6]** STEYERBERG E W, VERGOUWE Y. Towards better clinical prediction models: seven steps for development and an ABCD for validation[J]. *European Heart Journal*, 2014, 35(29): 1925-1931.
-
-**[7]** HOSMER D W Jr, LEMESHOW S, STURDIVANT R X. *Applied Logistic Regression*[M]. 3rd ed. Hoboken: Wiley, 2013.
-
-**[8]** ZADROZNY B, ELKAN C. Transforming classifier scores into accurate multiclass probability estimates[C]//Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining — KDD '02. New York: ACM, 2002: 694-699.
-
-**[9]** CHEN T, GUESTRIN C. XGBoost: a scalable tree boosting system[C]//Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '16). ACM, 2016: 785-794.
-
-**[10]** BRIER G W. Verification of forecasts expressed in terms of probability[J]. *Monthly Weather Review*, 1950, 78(1): 1-3.
-
-**[11]** PEDREGOSA F, VAROQUAUX G, GRAMFORT A, et al. Scikit-learn: machine learning in Python[J]. *Journal of Machine Learning Research*, 2011, 12: 2825-2830.
-
-**[12]** EFRON B, TIBSHIRANI R. *An introduction to the bootstrap*[M]. New York: Chapman & Hall, 1993.
-
-**[13]** COLLINS G S, REITSMA J B, ALTMAN D G, MOONS K G M. Transparent Reporting of a multivariable prediction model for Individual Prognosis or Diagnosis (TRIPOD): the TRIPOD statement[J]. *Annals of Internal Medicine*, 2015, 162(1): 55-63.
-
-**[14]** HANLEY J A, MCNEIL B J. The meaning and use of the area under a receiver operating characteristic (ROC) curve[J]. *Radiology*, 1982, 143(1): 29-36.
-
-**[15]** PENCINA M J, D'AGOSTINO R B Sr, D'AGOSTINO R B Jr, et al. Evaluating the added predictive ability of a new marker: from area under the ROC curve to reclassification and beyond[J]. *Statistics in Medicine*, 2008, 27(2): 157-172.
-
-**[16]** PENCINA M J, D'AGOSTINO R B Sr, STEYERBERG E W. Extensions of net reclassification improvement calculations to measures useful for categorical risk assessment[J]. *Clinical Epidemiology*, 2011, 3: 207-217.
-
-**[17]** HE J, et al. Improve myocardial strain estimation based on deformable groupwise registration with a locally low-rank dissimilarity metric[J]. *Journal of Cardiovascular Magnetic Resonance*, 2024, 26(1): 101004.
-
-**[18]** CLOUGH J R, et al. A topological loss function for deep-learning based image segmentation using persistent homology[J]. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2020, 44(12): 8766-8778.
-
-**[19]** GALLI E, et al. Myocardial work in nonobstructive hypertrophic cardiomyopathy: implications for outcome[J]. *Journal of the American Society of Echocardiography*, 2020, 33(10): 1201-1208.
-
-**[20]** AMZULESCU M S, et al. Myocardial strain imaging: review of general principles, validation, and sources of discrepancies[J]. *European Heart Journal-Cardiovascular Imaging*, 2019, 20(6): 605-619.
-
-**[21]** OMMEN S R, et al. 2020 AHA/ACC guideline for the diagnosis and treatment of patients with hypertrophic cardiomyopathy[J]. *Journal of the American College of Cardiology*, 2020, 76(25): e159-e240.
-
-**[22]** ROWIN E J, et al. Hypertrophic cardiomyopathy with left ventricular apical aneurysm: implications for risk stratification and management[J]. *Journal of the American College of Cardiology*, 2022, 79(25): 2465-2476.
-
-注：Bootstrap 解释为 **外层测试集的重复抽样**，方法学上与文献[12]一致。
-
-
----
-
-### 附：中期与合作者报告参考文献（原稿列举）
-
-### 中期报告
-
-**[23]** -, H.C., -, G.H., -, G.P., -, C.K.G., & -, R.S.P. (2025). Physiological and Pathological Hypertrophic Cardiomyopathy. International Journal For Multidisciplinary Research, 7(1). https://doi.org/10.36948/ijfmr.2025.v07i01.34963
-
-**[24]** Li, L., Gao, J., Liu, X., Chen, B.-X., Su, P., & Xie, B. (2024). Tissue-level evidence of fibroblast activation protein inhibitor imaging in hypertrophic obstructive cardiomyopathy: a case series. European Heart Journal - Case Reports, 8(5). https://doi.org/10.1093/ehjcr/ytae189
-
-**[25]** Zhou, S. K., Greenspan, H., Davatzikos, C., Duncan, J. S., Van Ginneken, B., Madabhushi, A., Prince, J. L., Rueckert, D., & Summers, R. M. (2021). A Review of Deep Learning in Medical Imaging: Imaging Traits, Technology Trends, Case Studies With Progress Highlights, and Future Promises. Proceedings of the IEEE, 109(5), 820–838. https://doi.org/10.1109/jproc.2021.3054390
-
-**[26]** Tian, H. (2025). Progress in the application of deep learning in medical image recognition. Applied and Computational Engineering, 135(1), 10–18. https://doi.org/10.54254/2755-2721/2025.20964
-
-**[27]** Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross, H.-M. (2020). Deep Random Forests for Small Sample Size Prediction with Medical Imaging Data. 2020 IEEE 17th International Symposium on Biomedical Imaging (ISBI), 1543–1547. https://doi.org/10.1109/isbi45749.2020.9098420
-
-### 流形 / 2D+t 报告（赵，Formal）
-
-> **文献编序**：赵稿 Formal 与正文 **§参考文献** 中的 **[17]–[22]** 为同一组文献，此处不重列。
-
-
----
-
 ## 附录 A　临床主分析图表文件与正文图号对照（冠军目录）
 
 | 文件（相对 `outputs_clinical_endpoint_n320_bs400/`） | 图号 | 正文绑定环节 |
@@ -1623,4 +1528,67 @@ python "export_md_to_docx.py" "report_academic_full_integrated.md" --base-dir "e
 | 图 24–35 | 临床终点主分析（原 `report_academic_integrated.md`） | 原稿图 1–12 |
 
 **表号**：中期原表属第三章；预后「表 1–7」属第五章；跨阶段并表须说明（第六章）。**图 1–35** 来源见上表。
+
+
+---
+
+## 参考文献
+
+正文引用统一为 **方括号序号 [n]**，与下列条目一一对应：**[1]–[16]** 为方法学与预后建模主线；**[17]–[22]** 为第四章（流形 / 2D+t）Formal 引文；**[23]–[27]** 为中期报告原稿补充。全部条目集中在报告最末。
+
+**[1]** CERQUEIRA M D, WEISSMAN N J, DILSZIAN V, et al. Standardized myocardial segmentation and nomenclature for tomographic imaging of the heart: a statement for healthcare professionals from the Cardiac Imaging Committee of the Council on Clinical Cardiology of the American Heart Association[J]. *Circulation*, 2002, 105(4): 539-542.
+
+**[2]** COX D R. Regression models and life-tables[J]. *Journal of the Royal Statistical Society: Series B (Methodological)*, 1972, 34(2): 187-220.
+
+**[3]** HARRELL F E JR, LEE K L, MARK D B. Multivariable prognostic models: issues in developing models, evaluating assumptions and adequacy, and measuring and reducing errors[J]. *Statistics in Medicine*, 1996, 15(4): 361-387.
+
+**[4]** HEAGERTY P J, LUMLEY T, PEPE M S. Time-dependent ROC curves for censored survival data and a diagnostic marker[J]. *Biometrics*, 2000, 56(2): 337-347.
+
+**[5]** VICKERS A J, ELKIN E B. Decision curve analysis: a novel method for evaluating prediction models[J]. *Medical Decision Making*, 2006, 26(6): 565-574.
+
+**[6]** STEYERBERG E W, VERGOUWE Y. Towards better clinical prediction models: seven steps for development and an ABCD for validation[J]. *European Heart Journal*, 2014, 35(29): 1925-1931.
+
+**[7]** HOSMER D W Jr, LEMESHOW S, STURDIVANT R X. *Applied Logistic Regression*[M]. 3rd ed. Hoboken: Wiley, 2013.
+
+**[8]** ZADROZNY B, ELKAN C. Transforming classifier scores into accurate multiclass probability estimates[C]//Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining — KDD '02. New York: ACM, 2002: 694-699.
+
+**[9]** CHEN T, GUESTRIN C. XGBoost: a scalable tree boosting system[C]//Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '16). ACM, 2016: 785-794.
+
+**[10]** BRIER G W. Verification of forecasts expressed in terms of probability[J]. *Monthly Weather Review*, 1950, 78(1): 1-3.
+
+**[11]** PEDREGOSA F, VAROQUAUX G, GRAMFORT A, et al. Scikit-learn: machine learning in Python[J]. *Journal of Machine Learning Research*, 2011, 12: 2825-2830.
+
+**[12]** EFRON B, TIBSHIRANI R. *An introduction to the bootstrap*[M]. New York: Chapman & Hall, 1993.
+
+**[13]** COLLINS G S, REITSMA J B, ALTMAN D G, MOONS K G M. Transparent Reporting of a multivariable prediction model for Individual Prognosis or Diagnosis (TRIPOD): the TRIPOD statement[J]. *Annals of Internal Medicine*, 2015, 162(1): 55-63.
+
+**[14]** HANLEY J A, MCNEIL B J. The meaning and use of the area under a receiver operating characteristic (ROC) curve[J]. *Radiology*, 1982, 143(1): 29-36.
+
+**[15]** PENCINA M J, D'AGOSTINO R B Sr, D'AGOSTINO R B Jr, et al. Evaluating the added predictive ability of a new marker: from area under the ROC curve to reclassification and beyond[J]. *Statistics in Medicine*, 2008, 27(2): 157-172.
+
+**[16]** PENCINA M J, D'AGOSTINO R B Sr, STEYERBERG E W. Extensions of net reclassification improvement calculations to measures useful for categorical risk assessment[J]. *Clinical Epidemiology*, 2011, 3: 207-217.
+
+**[17]** HE J, et al. Improve myocardial strain estimation based on deformable groupwise registration with a locally low-rank dissimilarity metric[J]. *Journal of Cardiovascular Magnetic Resonance*, 2024, 26(1): 101004.
+
+**[18]** CLOUGH J R, et al. A topological loss function for deep-learning based image segmentation using persistent homology[J]. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2020, 44(12): 8766-8778.
+
+**[19]** GALLI E, et al. Myocardial work in nonobstructive hypertrophic cardiomyopathy: implications for outcome[J]. *Journal of the American Society of Echocardiography*, 2020, 33(10): 1201-1208.
+
+**[20]** AMZULESCU M S, et al. Myocardial strain imaging: review of general principles, validation, and sources of discrepancies[J]. *European Heart Journal-Cardiovascular Imaging*, 2019, 20(6): 605-619.
+
+**[21]** OMMEN S R, et al. 2020 AHA/ACC guideline for the diagnosis and treatment of patients with hypertrophic cardiomyopathy[J]. *Journal of the American College of Cardiology*, 2020, 76(25): e159-e240.
+
+**[22]** ROWIN E J, et al. Hypertrophic cardiomyopathy with left ventricular apical aneurysm: implications for risk stratification and management[J]. *Journal of the American College of Cardiology*, 2022, 79(25): 2465-2476.
+
+**[23]** -, H.C., -, G.H., -, G.P., -, C.K.G., & -, R.S.P. (2025). Physiological and Pathological Hypertrophic Cardiomyopathy. International Journal For Multidisciplinary Research, 7(1). https://doi.org/10.36948/ijfmr.2025.v07i01.34963
+
+**[24]** Li, L., Gao, J., Liu, X., Chen, B.-X., Su, P., & Xie, B. (2024). Tissue-level evidence of fibroblast activation protein inhibitor imaging in hypertrophic obstructive cardiomyopathy: a case series. European Heart Journal - Case Reports, 8(5). https://doi.org/10.1093/ehjcr/ytae189
+
+**[25]** Zhou, S. K., Greenspan, H., Davatzikos, C., Duncan, J. S., Van Ginneken, B., Madabhushi, A., Prince, J. L., Rueckert, D., & Summers, R. M. (2021). A Review of Deep Learning in Medical Imaging: Imaging Traits, Technology Trends, Case Studies With Progress Highlights, and Future Promises. Proceedings of the IEEE, 109(5), 820–838. https://doi.org/10.1109/jproc.2021.3054390
+
+**[26]** Tian, H. (2025). Progress in the application of deep learning in medical image recognition. Applied and Computational Engineering, 135(1), 10–18. https://doi.org/10.54254/2755-2721/2025.20964
+
+**[27]** Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross, H.-M. (2020). Deep Random Forests for Small Sample Size Prediction with Medical Imaging Data. 2020 IEEE 17th International Symposium on Biomedical Imaging (ISBI), 1543–1547. https://doi.org/10.1109/isbi45749.2020.9098420
+
+注：Bootstrap 解释为 **外层测试集的重复抽样**，方法学上与文献[12]一致。
 
