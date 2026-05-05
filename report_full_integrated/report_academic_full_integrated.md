@@ -113,7 +113,16 @@
 
 **实现**：与 `D:\桌面\短轴分割模型\` 中 `lib/cineUtils.py`、`batch_segmentation.py` 一致；四类解剖语义及 **`SA.pth`** 须与训练方核对后定稿。
 
-![短轴 MRI 分割推理流程（示意）](report_assets/flowcharts/shortaxis_unet_pipeline.png)
+
+<div align="center">
+
+<img src="report_assets/flowcharts/shortaxis_unet_pipeline.png" width="720" alt="短轴 MRI 分割推理流程（示意）" />
+
+</div>
+
+<p align="center"><strong>短轴 MRI 分割推理流程（示意）</strong></p>
+
+
 
 | 参数 | 取值（以推理代码为准） |
 |------|------------------------|
@@ -153,7 +162,16 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 ```
 **泄漏控制**：融合权重、树/MLP 超参 **仅由内层 CV/OOF 决定**；**所有用于临床复述的阈值** 均在 **训练 OOF 融合概率** 上确定后再用于 **同一固定外测**。流程示意如下。
 
-![预后建模评估与外层划分流程（示意）](report_assets/flowcharts/endpoint_eval_pipeline.png)
+
+<div align="center">
+
+<img src="report_assets/flowcharts/endpoint_eval_pipeline.png" width="720" alt="预后建模评估与外层划分流程（示意）" />
+
+</div>
+
+<p align="center"><strong>预后建模评估与外层划分流程（示意）</strong></p>
+
+
 
 **Cox 轴**：三组协变量（基础 / 几何扩展 / 全特征）；C-index 与 time-dependent 图示按脚本实现[2][3][4]（本文为 horizon 二元代理，非 IPCW）。**判别轴**：**XGBoost**[9]（或 RF）、**浅层 MLP**，折内 **`0.4·AUC + 0.3·BA + 0.3·F1`（阈 0.5）**；OOF 搜融合权 **w**；AUC 含义见[14]。
 
@@ -358,7 +376,16 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 
 说明模型仍存在着模型学习不充分的问题，其原因可能是数据集中本身 Class 为 1（患病）的数据量过少，因而需要针对 Class 1 进行学习，以提升 call__back 率，从以下流形学习图中我们也可以得到这一点：
 
-![图 1](report_assets/midterm/figure_01.png)
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_01.png" width="720" alt="图 1" />
+
+</div>
+
+<p align="center"><strong>图 1</strong></p>
+
+
 
 ##### 图 1: t-SNE特征
 
@@ -397,9 +424,27 @@ train_test_split(test_size=0.25, stratify=endpoint, random_state=20260501)
 
 在完成心肌分割区域提取后， 本研究进一步采用基于区域再划分的方式对数据进行增强， 将每个心肌区域划分为四个局部子区域。针对生成的高维一维特征向量，本研究分别构建了多层感知机（MLP）模型与一维卷积神经网络（1D CNN）模型进行分类学习。
 
-![图 2](report_assets/midterm/figure_02.png)
 
-![图 3](report_assets/midterm/figure_03.png)
+<div align="center">
+
+<img src="report_assets/midterm/figure_02.png" width="720" alt="图 2" />
+
+</div>
+
+<p align="center"><strong>图 2</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_03.png" width="720" alt="图 3" />
+
+</div>
+
+<p align="center"><strong>图 3</strong></p>
+
+
 
 图2： 完整心肌图像（左）和局部子区域心肌图像（右）
 
@@ -510,13 +555,49 @@ N(total) = 4 × N(patients)
 
 结果可视化
 
-![图 4](report_assets/midterm/figure_04.png)
 
-![图 5](report_assets/midterm/figure_05.png)
+<div align="center">
 
-![图 6](report_assets/midterm/figure_06.png)
+<img src="report_assets/midterm/figure_04.png" width="720" alt="图 4" />
 
-![图 7](report_assets/midterm/figure_07.png)
+</div>
+
+<p align="center"><strong>图 4</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_05.png" width="720" alt="图 5" />
+
+</div>
+
+<p align="center"><strong>图 5</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_06.png" width="720" alt="图 6" />
+
+</div>
+
+<p align="center"><strong>图 6</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_07.png" width="720" alt="图 7" />
+
+</div>
+
+<p align="center"><strong>图 7</strong></p>
+
+
 
 图3: ROC曲线与混淆矩阵
 
@@ -526,13 +607,40 @@ N(total) = 4 × N(patients)
 
 获取的数据如下图表示：
 
-![图 8](report_assets/midterm/figure_08.png)
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_08.png" width="720" alt="图 8" />
+
+</div>
+
+<p align="center"><strong>图 8</strong></p>
+
+
 
 ##### 图 4:面积变化图
 
-![图 9](report_assets/midterm/figure_09.png)
 
-![图 10](report_assets/midterm/figure_10.png)
+<div align="center">
+
+<img src="report_assets/midterm/figure_09.png" width="720" alt="图 9" />
+
+</div>
+
+<p align="center"><strong>图 9</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_10.png" width="720" alt="图 10" />
+
+</div>
+
+<p align="center"><strong>图 10</strong></p>
+
+
 
 (a) 质心轨迹图                                        (b) 光流图
 
@@ -629,7 +737,16 @@ N(total) = 4 × N(patients)
 
 遍历全阈值范围，分析不同阈值下模型的准确率、召回率、精确率等关键指标，筛选既能满足临床漏诊控制需求，又能平衡误诊风险的最优阈值。
 
-![图 11](report_assets/midterm/figure_11.png)
+
+<div align="center">
+
+<img src="report_assets/midterm/figure_11.png" width="720" alt="图 11" />
+
+</div>
+
+<p align="center"><strong>图 11</strong></p>
+
+
 
 ##### 图 6: 面积变化图
 
@@ -731,7 +848,7 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 形态学实体边缘提取
 
-在微分几何分析中，建立严格的同源点对应，使得病人心脏严格对齐，这映射有效性的先决条件。传统基于像素掩码的直接提取极易陷入“环形嵌套”歧义，导致内外膜重采样时发生锯齿状的时空漂移错位，造成图像数据获取扭曲与错位[1]。为此，本研究引入了基于布尔异或运算与形态学腐的实体边缘提取算法。通过将心肌和心腔（intensity 1 和 0）在逻辑域合并为实心连通域，并以此剥离出病人心肌内外膜像素值。为克服重度 HCM  患者收缩期心腔极度闭塞引发的拓扑断裂[2]，即内外膜图像分割不完整，不连续的问题，我们下调有效像素阈值至 12，并设定最大容忍极角缺口为 120◦，从而在时序遍历中自适应地实现了心尖/心底残缺层向核心中间层的 n → m（即从n层通过删除问题层转化为m层） 降维过滤。
+在微分几何分析中，建立严格的同源点对应，使得病人心脏严格对齐，这映射有效性的先决条件。传统基于像素掩码的直接提取极易陷入“环形嵌套”歧义，导致内外膜重采样时发生锯齿状的时空漂移错位，造成图像数据获取扭曲与错位[17]。为此，本研究引入了基于布尔异或运算与形态学腐的实体边缘提取算法。通过将心肌和心腔（intensity 1 和 0）在逻辑域合并为实心连通域，并以此剥离出病人心肌内外膜像素值。为克服重度 HCM  患者收缩期心腔极度闭塞引发的拓扑断裂[18]，即内外膜图像分割不完整，不连续的问题，我们下调有效像素阈值至 12，并设定最大容忍极角缺口为 120◦，从而在时序遍历中自适应地实现了心尖/心底残缺层向核心中间层的 n → m（即从n层通过删除问题层转化为m层） 降维过滤。
 
 在取点方面，为了避免等间距取点因为心脏形变而带来的锯齿状边缘，损失各点之间对应
 
@@ -755,7 +872,7 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 针对心脏的整体性，我们选用了自下而上的生物力学加权积分策略。鉴于不同心室节段的
 
-运动做功大小呈非均匀分布，策略提取各层外膜像素面积 Az 作为生物力学权重，从而将全局动态轨迹定义为 ∆(t) = ∑(Az · ∥δz(t)∥2)/ ∑ Az。[3][4]这种方式，既在一定程度上规避了三维层间
+运动做功大小呈非均匀分布，策略提取各层外膜像素面积 Az 作为生物力学权重，从而将全局动态轨迹定义为 ∆(t) = ∑(Az · ∥δz(t)∥2)/ ∑ Az。[19][20]这种方式，既在一定程度上规避了三维层间
 
 空间相关性不足，又依据真实的解剖质量比例，在较小损失下保留了局部病变对全心室泵血功能的代偿与拖累效应。
 
@@ -775,21 +892,48 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 3.2 心内膜绝对动力学 (Endocardial Kinematics)：致死性心腔绞杀
 
-![图 12](report_assets/zhao/figure_01.png)
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_01.png" width="720" alt="图 12" />
+
+</div>
+
+<p align="center"><strong>图 12</strong></p>
+
+
 
 心内膜的绝对运动轨迹直接决定了左室流出道的通畅性。对内膜域的 2D+t 时序偏离度曲线进行分析，生存组（n = 661）的宏观振幅始终稳定在较高水平（∼ 0.16），表现出良好的向心收缩代偿能力；而死亡组（n = 37）的振幅曲线发生了全局性塌陷（0.12 ∼ 0.14），揭示了重症患者内膜运动的高度受限与极度僵硬。
 
 在基于全局坐标重建的平均3D相空间中（即PCA结果），这种动力学差异被进一步放大：生存组的内膜平均轨迹形成了一个高度收敛、致密的引力子结构（蓝线）；而死亡组的平均轨迹则呈现出拓扑发散与轨道偏移（红线），在收缩期激增出极端的畸变轨迹。
 
-![图 13](report_assets/zhao/figure_02.png)
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_02.png" width="720" alt="图 13" />
+
+</div>
+
+<p align="center"><strong>图 13</strong></p>
+
+
 
 通过独立子流形逆映射提取的本构形变场解释了这一崩溃的物理元凶：
 
 生存组内膜主导法则：其第一主成分（PC1，方差占比 25.7%）呈现为相对均匀的向心性收缩向量（蓝色箭头），表明心肌虽有肥厚，但仍维持着协调的流体动力学泵血边界。
 
-![图 14](report_assets/zhao/figure_03.png)
 
-死亡组内膜主导法则：死亡组的 PC1 解释方差增至 36.0%，且其物理向量场彻底异化。极度肥厚的室间隔（左侧）与下壁（底部）呈现出非对称的向内侵入，向量直插圆心。这种特异性的，直接导致了心腔内血流的物理阻断，是诱发血流动力学梗阻[5]与猝死的一大原因
+<div align="center">
+
+<img src="report_assets/zhao/figure_03.png" width="720" alt="图 14" />
+
+</div>
+
+<p align="center"><strong>图 14</strong></p>
+
+
+
+死亡组内膜主导法则：死亡组的 PC1 解释方差增至 36.0%，且其物理向量场彻底异化。极度肥厚的室间隔（左侧）与下壁（底部）呈现出非对称的向内侵入，向量直插圆心。这种特异性的，直接导致了心腔内血流的物理阻断，是诱发血流动力学梗阻[21]与猝死的一大原因
 
 3.3 心外膜绝对动力学 (Epicardial Kinematics)：失代偿性外膨与约束丧失
 
@@ -797,9 +941,27 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 2D+t 与时序分析同样显示，死亡组外膜的全局运动幅度被显著压抑。
 
-![图 15](report_assets/zhao/figure_04.png)
 
-![图 16](report_assets/zhao/figure_05.png)
+<div align="center">
+
+<img src="report_assets/zhao/figure_04.png" width="720" alt="图 15" />
+
+</div>
+
+<p align="center"><strong>图 15</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_05.png" width="720" alt="图 16" />
+
+</div>
+
+<p align="center"><strong>图 16</strong></p>
+
+
 
 死亡组的PCA平均轨迹也更为发散。
 
@@ -807,43 +969,95 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 生存组外膜特征：其前三大主成分的形变向量均相对微弱，且多顺应圆周切线或轻微向内，表明心脏外部结构依然保持着稳定的生理锚定与刚体约束。
 
-死亡组外膜特征：在死亡组的次要变形基底中（如 PC2 14.7% 与 PC3 10.9%），左下侧壁出现了密集且显著的“向外、向下”放射状刺出向量（红色箭头）。结合内膜域的发现，我们认为：由于内膜发生了极端的闭塞与梗阻，左室内高压无法通过主动脉瓣释放，强大的腔内异常应力突破了受损心肌的拉伸极限，导致心脏外壳在局部发生反生理的滑移与代偿性外膨。[6]
+死亡组外膜特征：在死亡组的次要变形基底中（如 PC2 14.7% 与 PC3 10.9%），左下侧壁出现了密集且显著的“向外、向下”放射状刺出向量（红色箭头）。结合内膜域的发现，我们认为：由于内膜发生了极端的闭塞与梗阻，左室内高压无法通过主动脉瓣释放，强大的腔内异常应力突破了受损心肌的拉伸极限，导致心脏外壳在局部发生反生理的滑移与代偿性外膨。[22]
 
-![图 17](report_assets/zhao/figure_06.png)
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_06.png" width="720" alt="图 17" />
+
+</div>
+
+<p align="center"><strong>图 17</strong></p>
+
+
 
 3.4 跨壁运动学发散度
 
-![图 18](report_assets/zhao/figure_07.png)
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_07.png" width="720" alt="图 18" />
+
+</div>
+
+<p align="center"><strong>图 18</strong></p>
+
+
 
 心内膜与心外膜的孤立运动虽能反映边界流体力学与刚体位移特征，但真正决定心脏做功 效率与心肌本构特性的，是内、外膜在空间中的相对运动梯度。我们将当前帧内、外膜各自的动 态轨迹相减（vdiff(t) = vendo(t)−vepi(t)），提取了跨壁运动学发散度。该指标在物理本质上彻 底剔除了患者个体静态室壁厚度的干扰，纯粹量化了心肌层在收缩过程中的动态增厚率与做功幅度。
 
 对跨壁2D+t 时序偏离度的大样本统计显示，生存组的宏观发散度轨迹稳定在较高区间（∼0.19），保留了明显的跨壁收缩梯度。而死亡组的发散度曲线振幅大幅缩水至 0.15 左右，且曲线波动趋于低平。
 
-![图 19](report_assets/zhao/figure_08.png)
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_08.png" width="720" alt="图 19" />
+
+</div>
+
+<p align="center"><strong>图 19</strong></p>
+
+
 
 在独立子流形逆映射的形变场分析中，我们发现了与心内/外膜域发生的形变场空间重定向不同，死亡组跨壁主导基底（红色箭头）与生存组（蓝色箭头）在空间方向上呈现出高度的一致性。二者的特征变形均主要沿心室壁 （尤其是左侧室间隔与下壁）的法线方向，表现为向心的径向增厚（RadialThickening）意图。
 
 综上所述，通过内膜心腔闭塞、外膜失代偿外膨与跨壁僵硬衰竭的三维动力学解耦，本研 究构建的主成分物理逆映射架构，获得了驱动HCM走向致死性终点事件的影像学本构规律
 
-[1]He, J., et al. (2024). Improve myocardial strain estimation based on deformable groupwise registration with a locally low-rank dissimilarity metric. Journal of Cardiovascular Magnetic Resonance, 26(1), 101004.
 
-[2]Clough, J. R., et al. (2020). A topological loss function for deep-learning based image segmentation using persistent homology. IEEE Transactions on Pattern Analysis and Machine Intelligence, 44(12), 8766-8778.
 
-[3]Galli, E., et al. (2020). Myocardial work in nonobstructive hypertrophic cardiomyopathy: implications for outcome. Journal of the American Society of Echocardiography, 33(10), 1201-1208.
+<div align="center">
 
-[4]Amzulescu, M. S., et al. (2019). Myocardial strain imaging: review of general principles, validation, and sources of discrepancies. European Heart Journal-Cardiovascular Imaging, 20(6), 605-619.
+<img src="report_assets/zhao/figure_09.jpeg" width="720" alt="图 20" />
 
-[5]Ommen, S. R., et al. (2020). 2020 AHA/ACC guideline for the diagnosis and treatment of patients with hypertrophic cardiomyopathy. Journal of the American College of Cardiology, 76(25), e159-e240.
+</div>
 
-[6]Rowin, E. J., et al. (2022). Hypertrophic cardiomyopathy with left ventricular apical aneurysm: implications for risk stratification and management. Journal of the American College of Cardiology, 79(25), 2465-2476
+<p align="center"><strong>图 20</strong></p>
 
-![图 20](report_assets/zhao/figure_09.jpeg)
 
-![图 21](report_assets/zhao/figure_10.jpeg)
 
-![图 22](report_assets/zhao/figure_11.jpeg)
 
-![图 23](report_assets/zhao/figure_12.png)
+<div align="center">
+
+<img src="report_assets/zhao/figure_10.jpeg" width="720" alt="图 21" />
+
+</div>
+
+<p align="center"><strong>图 21</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_11.jpeg" width="720" alt="图 22" />
+
+</div>
+
+<p align="center"><strong>图 22</strong></p>
+
+
+
+
+<div align="center">
+
+<img src="report_assets/zhao/figure_12.png" width="720" alt="图 23" />
+
+</div>
+
+<p align="center"><strong>图 23</strong></p>
+
+
 路径二：AHA 17 节段 + 心肌环几何 + 相位派生特征，对齐 Excel 终点；**第五章**给出主分析与敏感性。
 
 
@@ -862,7 +1076,7 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 已在仓库落盘的实验批次示例（同一脚本，参数组合不同）：
 
-| ID | 输出目录（相对 ``） | 入组 / 要点 | 树/MLP/融合标签 | 备注 |
+| ID | 输出目录（相对工作区或仓库根） | 入组 / 要点 | 树/MLP/融合标签 | 备注 |
 |----|--------------------------------------|-------------|-----------------|------|
 | E0 | `outputs_deep_full_gpu_sprint3` | 历史 sprint | 基于 **`time`≤1095 天** 构造的代理二类标签（与本篇 **`endpoint`** 字段不同） | 仅作史学定位 |
 | E1 | `outputs_deep_full_gpu_clinical_endpoint` | 首批 endpoint | **`endpoint`** | 冒烟扩展 |
@@ -894,7 +1108,16 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 30　三模型外测 endpoint 指标的「热力图 + 分组柱」双编码（`figures_extra/`）
 
-![图30 三模型 endpoint 指标组合图](outputs_clinical_endpoint_n320_bs400/figures_extra/fig_bar_models_endpoint_metrics.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures_extra/fig_bar_models_endpoint_metrics.png" width="720" alt="图30 三模型 endpoint 指标组合图" />
+
+</div>
+
+<p align="center"><strong>图30 三模型 endpoint 指标组合图</strong></p>
+
+
 
 ---
 
@@ -915,7 +1138,16 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 24　多模型 time-dependent AUC（horizon：**365 / 730 / 1095** 天；与 §5.2、§5.4 单列 `endpoint` 判别不同，见上文）
 
-![图24 各模型 time-dependent AUC](outputs_clinical_endpoint_n320_bs400/figures/time_dependent_auc_curve.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures/time_dependent_auc_curve.png" width="720" alt="图24 各模型 time-dependent AUC" />
+
+</div>
+
+<p align="center"><strong>图24 各模型 time-dependent AUC</strong></p>
+
+
 
 **小结**：在上述 **依赖 `time` 与 horizon 的子任务** 上，MLP / 融合的 time-dependent AUC 仍较高，Cox 全模型相对树/判别器偏弱——与 **直接使用 `endpoint` 的全样本二类判别**并行，可作为 **预后时间结构**的补充呈现。
 
@@ -927,7 +1159,16 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 25　外测 endpoint 多曲线 ROC（`figures/roc_endpoint_multimodel_test.png`）
 
-![图25 外测 ROC 曲线 多模型](outputs_clinical_endpoint_n320_bs400/figures/roc_endpoint_multimodel_test.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures/roc_endpoint_multimodel_test.png" width="720" alt="图25 外测 ROC 曲线 多模型" />
+
+</div>
+
+<p align="center"><strong>图25 外测 ROC 曲线 多模型</strong></p>
+
+
 
 ---
 
@@ -937,11 +1178,29 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 26　融合校准诊断（校准 + 预测概率密度，`figures/`）
 
-![图26 融合模型校准曲线与概率分布](outputs_clinical_endpoint_n320_bs400/figures/calibration_curve_endpoint_ensemble.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures/calibration_curve_endpoint_ensemble.png" width="720" alt="图26 融合模型校准曲线与概率分布" />
+
+</div>
+
+<p align="center"><strong>图26 融合模型校准曲线与概率分布</strong></p>
+
+
 
 #### 图 27　决策曲线 DCA（`figures/`）
 
-![图27 融合模型决策曲线](outputs_clinical_endpoint_n320_bs400/figures/decision_curve_endpoint_ensemble.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures/decision_curve_endpoint_ensemble.png" width="720" alt="图27 融合模型决策曲线" />
+
+</div>
+
+<p align="center"><strong>图27 融合模型决策曲线</strong></p>
+
+
 
 **探索延伸（可选副业）**：在 **`outputs_clinical_endpoint_champion_n320_iso`** 若已生成带 `_isotonic` 后缀的同构图与 CSV，可作 **附录图 S1/S2**——见 **§5.10**。**主文不改变图 26/4 的默认文件名。**
 
@@ -963,7 +1222,16 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 31　阈值规则的柱–散点复合图（`figures_extra/`）
 
-![图31 阈值规则组合图](outputs_clinical_endpoint_n320_bs400/figures_extra/fig_bar_threshold_rules.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures_extra/fig_bar_threshold_rules.png" width="720" alt="图31 阈值规则组合图" />
+
+</div>
+
+<p align="center"><strong>图31 阈值规则组合图</strong></p>
+
+
 
 ---
 
@@ -988,11 +1256,29 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 32　Bootstrap 区间「森林摘要」可视化（融合，`figures_extra/`）
 
-![图32 Bootstrap 区间森林图](outputs_clinical_endpoint_n320_bs400/figures_extra/fig_forest_bootstrap_ci_model6.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures_extra/fig_forest_bootstrap_ci_model6.png" width="720" alt="图32 Bootstrap 区间森林图" />
+
+</div>
+
+<p align="center"><strong>图32 Bootstrap 区间森林图</strong></p>
+
+
 
 #### 图 33　融合 endpoint AUC 的 Bootstrap：**直方图 + KDE + 正态 Q–Q**（`figures_extra/`）
 
-![图33 Bootstrap AUC 分布与 Q-Q](outputs_clinical_endpoint_n320_bs400/figures_extra/fig_hist_bootstrap_ensemble_auc_endpoint.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures_extra/fig_hist_bootstrap_ensemble_auc_endpoint.png" width="720" alt="图33 Bootstrap AUC 分布与 Q-Q" />
+
+</div>
+
+<p align="center"><strong>图33 Bootstrap AUC 分布与 Q-Q</strong></p>
+
+
 
 #### 表 5　多 seed 概要（固定 OOF 主阈，`seed_repeat_summary.csv`）
 
@@ -1013,11 +1299,29 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 28　事件减非事件的节段均值差（matplotlib `RdBu_r` 色谱，`figures/`）
 
-![图28 牛眼图 事件减去非事件](outputs_clinical_endpoint_n320_bs400/figures/bullseye_standard_diff.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures/bullseye_standard_diff.png" width="720" alt="图28 牛眼图 事件减去非事件" />
+
+</div>
+
+<p align="center"><strong>图28 牛眼图 事件减去非事件</strong></p>
+
+
 
 #### 图 29　Cox-full Bootstrap 稳定性映射（`|coef|` top-5 频率，`figures/`）
 
-![图29 节段 Cox top5 稳定性](outputs_clinical_endpoint_n320_bs400/figures/bullseye_top5_stability.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures/bullseye_top5_stability.png" width="720" alt="图29 节段 Cox top5 稳定性" />
+
+</div>
+
+<p align="center"><strong>图29 节段 Cox top5 稳定性</strong></p>
+
+
 
 #### 表 6　节段进入 Cox-full（全协变量 Cox）模型 top5 的频率（节选，`segment_stability.csv`；≤200 次 bootstrap）
 
@@ -1031,7 +1335,16 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 34　上位节段频率「条 + 轨迹线」组合（`figures_extra/`）
 
-![图34 节段 Cox top5 频率组合图](outputs_clinical_endpoint_n320_bs400/figures_extra/fig_bar_segment_stability_top.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures_extra/fig_bar_segment_stability_top.png" width="720" alt="图34 节段 Cox top5 频率组合图" />
+
+</div>
+
+<p align="center"><strong>图34 节段 Cox top5 频率组合图</strong></p>
+
+
 
 ---
 
@@ -1054,7 +1367,16 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 #### 图 35　入组策略敏感性：并排柱 + 指标差分（`figures_extra/`）
 
-![图35 两队列融合模型指标对比](outputs_clinical_endpoint_n320_bs400/figures_extra/fig_compare_two_cohorts_ensemble.png)
+
+<div align="center">
+
+<img src="outputs_clinical_endpoint_n320_bs400/figures_extra/fig_compare_two_cohorts_ensemble.png" width="720" alt="图35 两队列融合模型指标对比" />
+
+</div>
+
+<p align="center"><strong>图35 两队列融合模型指标对比</strong></p>
+
+
 
 ---
 
@@ -1151,6 +1473,8 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 ## 参考文献
 
+正文引用统一为 **方括号序号 [n]**，与下列文献表对应：**[1]–[16]** 为方法学与预后建模主线；**[17]–[22]** 为第四章（流形 / 2D+t）Formal 引文；**[23]–[27]** 为中期报告原稿补充（亦见文末附录）。
+
 **[1]** CERQUEIRA M D, WEISSMAN N J, DILSZIAN V, et al. Standardized myocardial segmentation and nomenclature for tomographic imaging of the heart: a statement for healthcare professionals from the Cardiac Imaging Committee of the Council on Clinical Cardiology of the American Heart Association[J]. *Circulation*, 2002, 105(4): 539-542.
 
 **[2]** COX D R. Regression models and life-tables[J]. *Journal of the Royal Statistical Society: Series B (Methodological)*, 1972, 34(2): 187-220.
@@ -1183,6 +1507,18 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 **[16]** PENCINA M J, D'AGOSTINO R B Sr, STEYERBERG E W. Extensions of net reclassification improvement calculations to measures useful for categorical risk assessment[J]. *Clinical Epidemiology*, 2011, 3: 207-217.
 
+**[17]** HE J, et al. Improve myocardial strain estimation based on deformable groupwise registration with a locally low-rank dissimilarity metric[J]. *Journal of Cardiovascular Magnetic Resonance*, 2024, 26(1): 101004.
+
+**[18]** CLOUGH J R, et al. A topological loss function for deep-learning based image segmentation using persistent homology[J]. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2020, 44(12): 8766-8778.
+
+**[19]** GALLI E, et al. Myocardial work in nonobstructive hypertrophic cardiomyopathy: implications for outcome[J]. *Journal of the American Society of Echocardiography*, 2020, 33(10): 1201-1208.
+
+**[20]** AMZULESCU M S, et al. Myocardial strain imaging: review of general principles, validation, and sources of discrepancies[J]. *European Heart Journal-Cardiovascular Imaging*, 2019, 20(6): 605-619.
+
+**[21]** OMMEN S R, et al. 2020 AHA/ACC guideline for the diagnosis and treatment of patients with hypertrophic cardiomyopathy[J]. *Journal of the American College of Cardiology*, 2020, 76(25): e159-e240.
+
+**[22]** ROWIN E J, et al. Hypertrophic cardiomyopathy with left ventricular apical aneurysm: implications for risk stratification and management[J]. *Journal of the American College of Cardiology*, 2022, 79(25): 2465-2476.
+
 注：Bootstrap 解释为 **外层测试集的重复抽样**，方法学上与文献[12]一致。
 
 
@@ -1192,29 +1528,19 @@ Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross,
 
 ### 中期报告
 
--, H.C., -, G.H., -, G.P., -, C.K.G., & -, R.S.P. (2025). Physiological and Pathological Hypertrophic Cardiomyopathy. International Journal For Multidisciplinary Research, 7(1). https://doi.org/10.36948/ijfmr.2025.v07i01.34963
+**[23]** -, H.C., -, G.H., -, G.P., -, C.K.G., & -, R.S.P. (2025). Physiological and Pathological Hypertrophic Cardiomyopathy. International Journal For Multidisciplinary Research, 7(1). https://doi.org/10.36948/ijfmr.2025.v07i01.34963
 
-Li, L., Gao, J., Liu, X., Chen, B.-X., Su, P., & Xie, B. (2024). Tissue-level evidence of fibroblast activation protein inhibitor imaging in hypertrophic obstructive cardiomyopathy: a case series. European Heart Journal - Case Reports, 8(5). https://doi.org/10.1093/ehjcr/ytae189
+**[24]** Li, L., Gao, J., Liu, X., Chen, B.-X., Su, P., & Xie, B. (2024). Tissue-level evidence of fibroblast activation protein inhibitor imaging in hypertrophic obstructive cardiomyopathy: a case series. European Heart Journal - Case Reports, 8(5). https://doi.org/10.1093/ehjcr/ytae189
 
-Zhou, S. K., Greenspan, H., Davatzikos, C., Duncan, J. S., Van Ginneken, B., Madabhushi, A., Prince, J. L., Rueckert, D., & Summers, R. M. (2021). A Review of Deep Learning in Medical Imaging: Imaging Traits, Technology Trends, Case Studies With Progress Highlights, and Future Promises. Proceedings of the IEEE, 109(5), 820–838. https://doi.org/10.1109/jproc.2021.3054390
+**[25]** Zhou, S. K., Greenspan, H., Davatzikos, C., Duncan, J. S., Van Ginneken, B., Madabhushi, A., Prince, J. L., Rueckert, D., & Summers, R. M. (2021). A Review of Deep Learning in Medical Imaging: Imaging Traits, Technology Trends, Case Studies With Progress Highlights, and Future Promises. Proceedings of the IEEE, 109(5), 820–838. https://doi.org/10.1109/jproc.2021.3054390
 
-Tian, H. (2025). Progress in the application of deep learning in medical image recognition. Applied and Computational Engineering, 135(1), 10–18. https://doi.org/10.54254/2755-2721/2025.20964
+**[26]** Tian, H. (2025). Progress in the application of deep learning in medical image recognition. Applied and Computational Engineering, 135(1), 10–18. https://doi.org/10.54254/2755-2721/2025.20964
 
-Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross, H.-M. (2020). Deep Random Forests for Small Sample Size Prediction with Medical Imaging Data. 2020 IEEE 17th International Symposium on Biomedical Imaging (ISBI), 1543–1547. https://doi.org/10.1109/isbi45749.2020.9098420
+**[27]** Katzmann, A., Muehlberg, A., Suehling, M., Norenberg, D., Holch, J. W., & Gross, H.-M. (2020). Deep Random Forests for Small Sample Size Prediction with Medical Imaging Data. 2020 IEEE 17th International Symposium on Biomedical Imaging (ISBI), 1543–1547. https://doi.org/10.1109/isbi45749.2020.9098420
 
 ### 流形 / 2D+t 报告（赵，Formal）
 
-[1] He, J., et al. (2024). *Journal of Cardiovascular Magnetic Resonance*, 26(1), 101004.
-
-[2] Clough, J. R., et al. (2020). *IEEE TPAMI*, 44(12), 8766–8778.
-
-[3] Galli, E., et al. (2020). *J Am Soc Echocardiogr*, 33(10), 1201–1208.
-
-[4] Amzulescu, M. S., et al. (2019). *Eur Heart J-Cardiovasc Imaging*, 20(6), 605–619.
-
-[5] Ommen, S. R., et al. (2020). *JACC*, 76(25), e159–e240.
-
-[6] Rowin, E. J., et al. (2022). *JACC*, 79(25), 2465–2476.
+> **文献编序**：赵稿 Formal 与正文 **§参考文献** 中的 **[17]–[22]** 为同一组文献，此处不重列。
 
 
 ---
