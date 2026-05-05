@@ -1,0 +1,25 @@
+%%{init: {'theme':'neutral', 'flowchart': {'htmlLabels': true}}}%%
+flowchart LR
+  subgraph input ["输入"]
+    NII["NIfTI 3D/4D 短轴电影"]
+  end
+  subgraph prep ["预处理"]
+    Res["层内重采样至约 0.994 mm"]
+    Aff["spacing 与 affine 更新"]
+    Trans["维度转置与一致化"]
+  end
+  subgraph infer ["逐切片推理"]
+    Dup["单通道复制为三通道"]
+    Patch["128 滑窗 stride 16"]
+    Norm["1-99 分位截断后 Z-score"]
+    UNet["UNet 3 入 4 出类"]
+    Vote["按类别票数融合"]
+    LV["以标签 1 为核心的连通域约束"]
+  end
+  subgraph out ["输出与下游"]
+    Seg["3D 标签体 _SEG.nii.gz"]
+    Vol["ED/ES 容积：标签 1 体素计数"]
+  end
+  NII --> Res --> Aff --> Trans
+  Trans --> Dup --> Patch --> Norm --> UNet --> Vote --> LV --> Seg
+  Seg --> Vol
