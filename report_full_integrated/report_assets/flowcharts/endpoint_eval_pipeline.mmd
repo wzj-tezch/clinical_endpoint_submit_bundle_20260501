@@ -1,0 +1,26 @@
+%%{init: {'theme':'neutral', 'flowchart': {'htmlLabels': true}}}%%
+flowchart TB
+  subgraph data ["数据与特征"]
+    L["标签与 seg 合并"]
+    F["几何+节段+boost"]
+    S["RobustScaler"]
+  end
+  subgraph split ["外层"]
+    O["25%分层测试 seed 20260501"]
+  end
+  subgraph inner ["训练折"]
+    CV["树/MLP 调参"]
+    OOF["OOF 概率"]
+    W["w 搜索"]
+    THR["阈值规则"]
+  end
+  subgraph test ["外测"]
+    MET["判别指标 ROC 校准等"]
+    CAL["校准与 DCA"]
+    BS["Bootstrap / 多 seed"]
+  end
+  L --> F --> S --> O
+  O --> CV --> OOF --> W --> THR
+  W --> MET
+  THR --> MET
+  MET --> CAL --> BS

@@ -1,0 +1,80 @@
+{
+  "seed": 20260501,
+  "time_unit": "days",
+  "horizons_days": [
+    365,
+    730,
+    1095
+  ],
+  "selected_samples": 266,
+  "selected_events_total": 45,
+  "selected_events_3y": 45,
+  "endpoint_binary_task_note": "树/MLP/融合的训练标签仅为 endpoint∈{0,1}，不再使用3年二元代理标签。",
+  "compute_requested": "auto",
+  "cpu_jobs": 19,
+  "eval_seeds": [
+    20260501,
+    20260538,
+    20260574
+  ],
+  "torch_cuda_available": true,
+  "xgboost_available": true,
+  "full_cohort_mode": false,
+  "requested_min_samples_cap": 320,
+  "label_seg_merge_candidates_unique_patients": 1015,
+  "compute_selected": "gpu",
+  "tree_backend": "xgboost",
+  "tree_device": "cuda",
+  "mlp_device": "cuda",
+  "ensemble_weight_mlp": 0.55,
+  "inner_cv_tune_composite": "0.4*AUC + 0.3*balanced_accuracy + 0.3*F1 (inner decision threshold 0.5)",
+  "oob_ensemble_primary_threshold_balanced_accuracy": 0.25887223657045977,
+  "oob_threshold_candidate_rules": [
+    "max_balanced_accuracy",
+    "max_youden_j",
+    "conservative_high_specificity",
+    "aggressive_high_sensitivity"
+  ],
+  "endpoint_ensemble_probability_metrics_fixed_test": {
+    "auc": 0.7857142857142857,
+    "balanced_accuracy_050": 0.7012987012987013,
+    "f1_050": 0.48,
+    "mcc_050": 0.3668253766205722,
+    "brier": 0.1317458878752964,
+    "ece": 0.14940334563294083,
+    "calibration_slope_logit": 0.5349909025167384,
+    "calibration_intercept_logit": -0.8275633925814141
+  },
+  "boost_features": [
+    "seg_top3_mean",
+    "seg_top5_mean",
+    "seg_base_apex_ratio",
+    "seg_dispersion_cv",
+    "DeltaTheta_x_top5"
+  ],
+  "stable_top5_segments_train": [
+    "seg09_amp",
+    "seg08_amp",
+    "seg10_amp",
+    "seg11_amp",
+    "seg17_amp"
+  ],
+  "tree_best_params": {
+    "max_depth": 6,
+    "min_child_weight": 2.0,
+    "learning_rate": 0.02,
+    "n_estimators": 900,
+    "subsample": 0.85,
+    "colsample_bytree": 0.75,
+    "reg_lambda": 3.0
+  },
+  "mlp_best_params": {
+    "hidden1": 64,
+    "hidden2": 32,
+    "dropout": 0.15,
+    "lr": 0.001,
+    "epochs": 140,
+    "patience": 20
+  },
+  "oof_isotonic_calibration_enabled": false
+}
